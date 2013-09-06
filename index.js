@@ -10,6 +10,8 @@ function _getUrlObject(myUrl){
 function _doesPathMatch(path, cookiePath){
 	if (!path || !cookiePath) return true;
 	
+	if (path === '/') return true; // i think this is how it should be...
+
 	cookiePath = cookiePath.replace('/', '\\/');
 	if (!/\/$/.test(cookiePath)) cookiePath += '/';
 	if (!/\/$/.test(path)) path += '/';
@@ -98,8 +100,8 @@ var ShortBread = function(options){
 				.value();
 	};
 
-	this.getCookieHeader = function(domain, path, dateTime){
-		return _.chain(this.getCookies(domain, path, dateTime))
+	this.getCookieHeader = function(myUrl, dateTime){
+		return _.chain(this.getCookies(myUrl, dateTime))
 				.map(function(c){ return c.values;})
 				.flatten()
 				.value()

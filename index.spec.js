@@ -86,6 +86,13 @@ describe('short-bread', function(){
 
 			expect(cookie.domain).to.be.equal('.google.com');
 		});
+		it('should handle cookie with a slash path', function(){
+			var shortBread = new ShortBread({url: 'www.google.com'});
+			var cookie = shortBread.setCookie('hey=guy; domain=.google.com; path=/ ');
+
+			expect(cookie).to.be.ok;
+			expect(cookie.values[0]).to.be.equal('hey=guy');
+		});
 
 	});
 
@@ -177,6 +184,38 @@ describe('short-bread', function(){
 			shortBread.setCookie('shitName=shitValue; domain=.google.com;secure; expires=Sat, 02 May 2019 23:38:25 GMT; ');
 
 			expect(shortBread.getCookies('https://www.google.com').length).to.be.equal(0);
+		});
+	});
+
+	describe('#getCookieHeader', function(){
+		it('should handle a single cookie', function(){
+			var shortBread = new ShortBread({url: 'www.google.com'});
+			shortBread.setCookie('shitName=shitValue; domain=.google.com; expires=Sat, 02 May 2019 23:38:25 GMT; ');
+
+			var cookieHeaderValue = shortBread.getCookieHeader('www.google.com');
+			expect(cookieHeaderValue).to.be.equal('shitName=shitValue');
+		});
+		it('should handle two cookies', function(){
+			var shortBread = new ShortBread({url: 'www.google.com'});
+			shortBread.setCookie('shitName=shitValue; domain=.google.com; expires=Sat, 02 May 2019 23:38:25 GMT; ');
+			shortBread.setCookie('hey=guy; domain=.google.com; path=/ ');
+
+			var cookieHeaderValue = shortBread.getCookieHeader('www.google.com');
+			expect(cookieHeaderValue).to.be.equal('shitName=shitValue; hey=guy');
+		});
+		it('should handle one cookie with two values', function(){
+			var shortBread = new ShortBread({url: 'www.google.com'});
+			shortBread.setCookie('shitName=shitValue; hey=guy; domain=.google.com; expires=Sat, 02 May 2019 23:38:25 GMT; ');
+
+			var cookieHeaderValue = shortBread.getCookieHeader('www.google.com');
+			expect(cookieHeaderValue).to.be.equal('shitName=shitValue; hey=guy');
+		});
+		it('should handle value with two equal signs', function(){
+			var shortBread = new ShortBread({url: 'www.google.com'});
+			shortBread.setCookie('shitName=shit=Value; hey=guy; domain=.google.com; expires=Sat, 02 May 2019 23:38:25 GMT; ');
+
+			var cookieHeaderValue = shortBread.getCookieHeader('www.google.com');
+			expect(cookieHeaderValue).to.be.equal('shitName=shit=Value; hey=guy');
 		});
 	});
 	
