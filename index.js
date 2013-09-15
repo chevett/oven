@@ -35,6 +35,11 @@ function _isCookieExpired(currentTime, cookieExpiration){
 	return currentTime >= cookieExpiration;
 }
 
+function _getCookieName(headerValue){
+	var match = headerValue.match(/^\s*([^=]+)/i);
+	return match ? match[1] : undefined;
+}
+
 function _parseCookieField(o, fieldName){
 	var regex = new RegExp('\\s*;\\s*' + fieldName, 'i');
 	var match = o.value.match(regex);
@@ -57,7 +62,7 @@ function _parseCookieFieldValue(o, fieldName, defaultFieldValue){
 var ShortBread = function(options){
 	if (!options || !options.url) throw {};
 	
-	var cookies = [], 
+	var cookies = {}, 
 		oDefaultUrl = _getUrlObject(options.url);
 	
 	function _parseSetCookieHeader(header){
@@ -78,12 +83,15 @@ var ShortBread = function(options){
 			.filter(function(v){ return v; })
 			.value();
 
+		o.name = _getCookieName(header);
+		o.id = o.name + '_' + o.domain;
+
 		return o;
 	}
 
 	this.setCookie = function(rawSetCookieHeaderValue){
 		var oCookie = _parseSetCookieHeader(rawSetCookieHeaderValue);
-		cookies.push(oCookie);
+		cookies[oCookie.id] = oCookie;
 		
 		return oCookie;
 	};

@@ -185,6 +185,13 @@ describe('short-bread', function(){
 
 			expect(shortBread.getCookies('https://www.google.com').length).to.be.equal(0);
 		});
+		it('should not duplicate cookies', function(){
+			var shortBread = new ShortBread({url: 'www.google.com'});
+			shortBread.setCookie('shitName=shitValue; domain=.google.com;');
+			shortBread.setCookie('shitName=shitValue; domain=.google.com;');
+
+			expect(shortBread.getCookies('https://www.google.com').length).to.be.equal(1);
+		});
 	});
 
 	describe('#getCookieHeader', function(){
@@ -216,6 +223,22 @@ describe('short-bread', function(){
 
 			var cookieHeaderValue = shortBread.getCookieHeader('www.google.com');
 			expect(cookieHeaderValue).to.be.equal('shitName=shit=Value; hey=guy');
+		});
+		it('should overwrite cookie values', function(){
+			var shortBread = new ShortBread({url: 'www.google.com'});
+			shortBread.setCookie('shitName=shitValue; domain=.google.com;');
+			shortBread.setCookie('shitName=newValue; domain=.google.com;');
+
+			var cookieHeaderValue = shortBread.getCookieHeader('www.google.com');
+			expect(cookieHeaderValue).to.be.equal('shitName=newValue');
+		});
+		it('should be able to delete cookies', function(){
+			var shortBread = new ShortBread({url: 'www.google.com'});
+			shortBread.setCookie('shitName=shitValue; domain=.google.com;');
+			shortBread.setCookie('shitName=newValue; domain=.google.com; expires=25 December 2001');
+
+			var cookieHeaderValue = shortBread.getCookieHeader('www.google.com');
+			expect(cookieHeaderValue).to.be.equal('');
 		});
 	});
 	
