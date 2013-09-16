@@ -183,7 +183,7 @@ describe('short-bread', function(){
 			var shortBread = new ShortBread({url: 'www.google.com'});
 			shortBread.setCookie('shitName=shitValue; domain=.google.com;secure; expires=Sat, 02 May 2019 23:38:25 GMT; ');
 
-			expect(shortBread.getCookies('https://www.google.com').length).to.be.equal(0);
+			expect(shortBread.getCookies('http://www.google.com').length).to.be.equal(0);
 		});
 		it('should not duplicate cookies', function(){
 			var shortBread = new ShortBread({url: 'www.google.com'});
@@ -240,6 +240,12 @@ describe('short-bread', function(){
 			var cookieHeaderValue = shortBread.getCookieHeader('www.google.com');
 			expect(cookieHeaderValue).to.be.equal('');
 		});
+		it('should work for the google pre-auth cookie thing', function(){
+			var shortBread = new ShortBread({url: 'https://accounts.google.com/Login'});
+			shortBread.setCookie('GALX=DdtWd7NAcew;Path=/;Secure ');
+
+			var cookieHeaderValue = shortBread.getCookieHeader('https://accounts.google.com/ServiceAuthLogin');
+			expect(cookieHeaderValue).to.be.equal('GALX=DdtWd7NAcew');
+		});
 	});
-	
 });

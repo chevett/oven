@@ -104,7 +104,7 @@ var ShortBread = function(options){
 				.filter(function(c){ return !_isCookieExpired(dateTime, c.expires); })
 				.filter(function(c){ return _doesDomainMatch(oUrl.hostname, c.domain); })
 				.filter(function(c){ return _doesPathMatch(oUrl.pathname, c.path); })
-				.filter(function(c){ return !c.secure || oUrl.secure;  })
+				.filter(function(c){ return !c.secure || /^https/i.test(oUrl.protocol);  })
 				.value();
 	};
 
