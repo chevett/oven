@@ -247,5 +247,24 @@ describe('short-bread', function(){
 			var cookieHeaderValue = shortBread.getCookieHeader('https://accounts.google.com/ServiceAuthLogin');
 			expect(cookieHeaderValue).to.be.equal('GALX=DdtWd7NAcew');
 		});
+		it('should use the default domain if none is provided', function(){
+			var shortBread = new ShortBread({url: 'www.google.com'});
+			shortBread.setCookie('shitName=shitValue; domain=.google.com; expires=Sat, 02 May 2019 23:38:25 GMT; ');
+
+			var cookieHeaderValue = shortBread.getCookieHeader();
+			console.log('wtf');
+			expect(cookieHeaderValue).to.be.equal('shitName=shitValue');
+		});
+	});
+	describe('ParsedCookie.toString()', function(){
+		// todo: test better!
+		// also fix the dates.
+		it('should be reasonable', function(){
+			var shortBread = new ShortBread({url: 'www.google.com'});
+			var cookieStr = 'shitName=shitValue; Domain=.google.com; Path=/; expires=Thu, 02 May 2019 23:38:25';
+			var cookie = shortBread.setCookie('shitName=shitValue; domain=.google.com; expires=Sat, 02 May 2019 23:38:25');
+		
+			expect(cookie.toString()).to.be.equal(cookieStr);
+		});
 	});
 });
