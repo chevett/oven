@@ -96,6 +96,7 @@ var ShortBread = function(options){
 		return oCookie;
 	};
 
+
 	this.getCookies = function(myUrl, dateTime){
 		var oUrl = _getUrlObject(myUrl) || {};
 		dateTime = dateTime || new Date();
@@ -119,6 +120,12 @@ var ShortBread = function(options){
 
 
 var ParsedCookie = function(){
+};
+
+ShortBread.prototype.setCookies = function(lst){
+	for (var i=0; i<lst.length; i++){
+		this.setCookie(lst[i]);
+	}
 };
 
 ParsedCookie.prototype.toString = function(){
