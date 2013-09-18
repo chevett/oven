@@ -255,6 +255,13 @@ describe('short-bread', function(){
 			console.log('wtf');
 			expect(cookieHeaderValue).to.be.equal('shitName=shitValue');
 		});
+		it('should not include priority field in the value', function(){
+			var shortBread = new ShortBread({url: 'www.google.com'});
+			shortBread.setCookie('kitten=newValue; domain=.google.com; Priority=High');
+
+			var cookieHeaderValue = shortBread.getCookieHeader('www.google.com');
+			expect(cookieHeaderValue).to.be.equal('kitten=newValue');
+		});
 	});
 	describe('ParsedCookie.toString()', function(){
 		// todo: test better!

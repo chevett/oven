@@ -73,6 +73,7 @@ var ShortBread = function(options){
 		_parseCookieFieldValue(o, 'expires');
 		_parseCookieFieldValue(o, 'path', oDefaultUrl.pathname);
 		_parseCookieFieldValue(o, 'domain', oDefaultUrl.hostname);
+		_parseCookieFieldValue(o, 'priority');
 		_parseCookieField(o, 'secure');
 		_parseCookieField(o, 'httpOnly');
 
