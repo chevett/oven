@@ -99,7 +99,7 @@ var ShortBread = function(options){
 
 
 	this.getCookies = function(myUrl, dateTime){
-		var oUrl = _getUrlObject(myUrl) || {};
+		var oUrl = _getUrlObject(myUrl || options.url) || {};
 		dateTime = dateTime || new Date();
 
 		return _.chain(cookies)

@@ -252,7 +252,7 @@ describe('short-bread', function(){
 			shortBread.setCookie('shitName=shitValue; domain=.google.com; expires=Sat, 02 May 2019 23:38:25 GMT; ');
 
 			var cookieHeaderValue = shortBread.getCookieHeader();
-			console.log('wtf');
+
 			expect(cookieHeaderValue).to.be.equal('shitName=shitValue');
 		});
 		it('should not include priority field in the value', function(){
