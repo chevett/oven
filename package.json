@@ -22,7 +22,6 @@
     "url": "https://github.com/chevett/short-bread/issues"
   },
   "dependencies": {
-    "parambulator": "~0.1.2",
     "underscore": "~1.5.1",
     "absolurl": "git://github.com/chevett/absolurl.git#master",
     "moment": "~2.2.1"

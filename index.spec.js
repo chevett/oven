@@ -1,6 +1,5 @@
 var ShortBread = require('./index');
 var expect = require('chai').expect;
-var _ = require('underscore').expect;
 
 describe('short-bread', function(){
 	it('should require options', function(){
