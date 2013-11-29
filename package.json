@@ -1,25 +1,26 @@
 {
-  "name": "short-bread",
-  "version": "0.0.0",
+  "name": "oven",
+  "version": "0.0.1",
   "description": "browser cookie store simulator",
   "main": "index.js",
   "scripts": {
-    "test": "mocha index.spec.js"
+    "test": "./node_modules/mocha/bin/mocha index.spec.js"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com/chevett/short-bread"
+    "url": "git@github.com/chevett/oven"
   },
   "keywords": [
     "cookie",
     "browser",
     "simulator",
-    "feet"
+	"set-cookie",
+	"headers"
   ],
-  "author": "chevett",
+  "author": "mike chevett",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chevett/short-bread/issues"
+    "url": "https://github.com/chevett/oven/issues"
   },
   "dependencies": {
     "underscore": "~1.5.1",
