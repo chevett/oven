@@ -1,4 +1,4 @@
-short-bread [![Build Status](https://travis-ci.org/chevett/short-bread.png)](https://travis-ci.org/chevett/short-bread)
+short-bread [![Build Status](https://travis-ci.org/chevett/oven.png)](https://travis-ci.org/chevett/oven)
 =========
 ===========
 
