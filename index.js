@@ -1,7 +1,6 @@
 var _ = require('underscore');
 var absolurl = require('absolurl');
 var url = require('url');
-var moment = require('moment');
 
 function _getUrlObject(myUrl){
 	if (!myUrl) return;
@@ -60,7 +59,7 @@ function _parseCookieFieldValue(o, fieldName, defaultFieldValue){
 	o.value = o.value.replace(regex, '');
 }
 
-var ShortBread = function(options){
+var Oven = function(options){
 	if (!options || !options.url) throw {};
 	
 	var cookies = {}, 
@@ -123,7 +122,7 @@ var ShortBread = function(options){
 var ParsedCookie = function(){
 };
 
-ShortBread.prototype.setCookies = function(lst){
+Oven.prototype.setCookies = function(lst){
 	for (var i=0; i<lst.length; i++){
 		this.setCookie(lst[i]);
 	}
@@ -134,11 +133,11 @@ ParsedCookie.prototype.toString = function(){
 		+ '; Domain='+this.domain 
 		+ '; Path=' +this.path;
 
-	if (this.expires) str+= '; expires=' + moment(this.expires).format('ddd, DD MMM YYYY HH:mm:ss');
+	if (this.expires) str+= '; Expires=' + new Date(this.expires).toUTCString();
 	if (this.secure) str += '; secure';
 	if (this.httpOnly) str += '; httponly';
 	
 	return str;
 };
 
-module.exports = ShortBread;
+module.exports = Oven;

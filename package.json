@@ -23,8 +23,7 @@
   },
   "dependencies": {
     "underscore": "~1.5.1",
-    "absolurl": "git://github.com/chevett/absolurl.git#master",
-    "moment": "~2.2.1"
+    "absolurl": "*"
   },
   "devDependencies": {
     "mocha": "*",
