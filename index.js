@@ -109,7 +109,7 @@ var Oven = function(options){
 				.value();
 	};
 
-	this.getCookieHeader = function(myUrl, dateTime){
+	this.getCookie = this.getCookieHeader = function(myUrl, dateTime){
 		return _.chain(this.getCookies(myUrl, dateTime))
 				.map(function(c){ return c.values;})
 				.flatten()
