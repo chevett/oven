@@ -1,4 +1,4 @@
-oven [![Build Status](https://travis-ci.org/chevett/oven.png)](https://travis-ci.org/chevett/oven)
+oven [![Build Status](https://travis-ci.org/chevett/oven.png)](https://travis-ci.org/chevett/oven) [![NPM](https://nodei.co/npm-dl/oven.png?months=1)](https://nodei.co/npm/oven/)
 =========
 
 
