@@ -19,7 +19,7 @@ oven.setCookie('tmp=someone; Expires=25, Dec 1999');
 oven.setCookie('tmp=someone; Domain=.no-no-no.com');
 
 console.log(defaultDomain + ': ' + oven.getCookie());
-console.log(defaultDomain + '/my-path: ' + oven.getCookie('www.miketown3.com/my-path'));
+console.log(defaultDomain + '/my-path: ' + oven.getCookie('/my-path'));
 console.log('www.google.com: ' + oven.getCookie('www.google.com'));
 console.log('\n-----');
 console.dir(parsedCookie);
