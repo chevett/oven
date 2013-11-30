@@ -30,7 +30,7 @@ output:
 www.miketown3.com: test=mt3_4real; notTemp=555
 www.miketown3.com/my-path: test=mt3_4real; search=heyGuy; notTemp=555
 www.google.com: test=goog
-www.google.com/my-path: test=goog
+www.google.com/my-path:
 
 ------
 { value: 'test=mt3',
