@@ -9,7 +9,7 @@ var defaultDomain = 'www.miketown3.com';
 var Oven = require('oven');
 var oven = new Oven({url: defaultDomain});
 
-var cookieObj = oven.setCookie('test=mt3');
+var parsedCookie = oven.setCookie('test=mt3');
 oven.setCookie('test=goog; Domain=.google.com');
 oven.setCookie('test=mt3_4real');
 oven.setCookie('search=heyGuy; Path=/my-path');
@@ -21,7 +21,8 @@ oven.setCookie('tmp=someone; Domain=.no-no-no.com');
 console.log(defaultDomain + ': ' + oven.getCookie());
 console.log(defaultDomain + '/my-path: ' + oven.getCookie('www.miketown3.com/my-path'));
 console.log('www.google.com: ' + oven.getCookie('www.google.com'));
-
+console.log('\n-----');
+console.dir(parsedCookie);
 ```
 output:
 ```js
