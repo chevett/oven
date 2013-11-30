@@ -9,8 +9,7 @@ function _getUrlObject(myUrl){
 
 function _doesPathMatch(path, cookiePath){
 	if (!path || !cookiePath) return true;
-	
-	if (path === '/') return true; // i think this is how it should be...
+	if (path === cookiePath) return true;
 
 	cookiePath = cookiePath.replace('/', '\\/');
 	if (!/\/$/.test(cookiePath)) cookiePath += '/';
@@ -53,7 +52,7 @@ function _parseCookieFieldValue(o, fieldName, defaultFieldValue){
 	var match = o.value.match(regex);
 	var fieldValue;
 	
-	if (match && match[1]) fieldValue = match[1];
+	if (match && match[1]) fieldValue = (match[1]||'').trim();
 
 	o[fieldName] = fieldValue || defaultFieldValue;
 	o.value = o.value.replace(regex, '');
