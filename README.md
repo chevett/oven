@@ -1,6 +1,6 @@
-oven [![Build Status](https://travis-ci.org/chevett/oven.png)](https://travis-ci.org/chevett/oven) [![NPM](https://nodei.co/npm-dl/oven.png?months=1)](https://nodei.co/npm/oven/)
+oven [![Build Status](https://travis-ci.org/chevett/oven.png)](https://travis-ci.org/chevett/oven) [![Dependency Status](https://gemnasium.com/chevett/oven.png)](https://gemnasium.com/chevett/oven) 
 =========
-
+[![NPM](https://nodei.co/npm-dl/oven.png?months=1)](https://nodei.co/npm/oven/)
 
 Put incoming set-cookie header values in the oven and get outgoing cookie header values.
 
