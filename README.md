@@ -21,6 +21,7 @@ oven.setCookie('tmp=someone; Domain=.no-no-no.com');
 console.log(defaultDomain + ': ' + oven.getCookie());
 console.log(defaultDomain + '/my-path: ' + oven.getCookie('/my-path'));
 console.log('www.google.com: ' + oven.getCookie('www.google.com'));
+console.log('www.google.com: ' + oven.getCookie('www.google.com/my-path'));
 console.log('\n-----');
 console.dir(parsedCookie);
 ```
@@ -29,6 +30,7 @@ output:
 www.miketown3.com: test=mt3_4real; notTemp=555
 www.miketown3.com/my-path: test=mt3_4real; search=heyGuy; notTemp=555
 www.google.com: test=goog
+www.google.com/my-path: test=goog
 
 ------
 { value: 'test=mt3',
