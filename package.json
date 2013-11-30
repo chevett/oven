@@ -1,6 +1,6 @@
 {
   "name": "oven",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "browser cookie store simulator",
   "main": "index.js",
   "scripts": {

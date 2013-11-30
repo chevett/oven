@@ -97,7 +97,7 @@ var Oven = function(options){
 
 
 	this.getCookies = function(myUrl, dateTime){
-		var oUrl = _getUrlObject(myUrl || options.url) || {};
+		var oUrl = _getUrlObject(absolurl.ensureComplete(myUrl, options.url) || options.url) || {};
 		dateTime = dateTime || new Date();
 
 		return _.chain(cookies)
