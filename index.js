@@ -1,69 +1,65 @@
 var _ = require('lodash');
-var absolurl = require('absolurl');
+var Absolurl = require('absolurl');
 var url = require('url');
 
-function _getUrlObject(myUrl){
-	if (!myUrl) return;
-	return url.parse(absolurl.ensureComplete(myUrl));
-}
-
-function _doesPathMatch(path, cookiePath){
-	if (!path || !cookiePath) return true;
-	if (path === cookiePath) return true;
-
-	cookiePath = cookiePath.replace('/', '\\/');
-	if (!/\/$/.test(cookiePath)) cookiePath += '/';
-	if (!/\/$/.test(path)) path += '/';
-
-	return new RegExp('^' + cookiePath).test(path);
-}
-
-function _doesDomainMatch(domain, cookieDomain){
-	if (!domain || !cookieDomain) return true;
-	if (!/^\./.test(cookieDomain)) cookieDomain = '.' + cookieDomain;
-	if (!/^\./.test(domain)) domain = '.' + domain;
-
-	cookieDomain = cookieDomain.replace('.', '\\.');
-
-	return new RegExp(cookieDomain + '$').test(domain);
-}
-
-function _isCookieExpired(currentTime, cookieExpiration){
-	if (!cookieExpiration) return false;
-
-	return currentTime >= cookieExpiration;
-}
-
-function _getCookieName(headerValue){
-	var match = headerValue.match(/^\s*([^=]+)/i);
-	return match ? match[1] : undefined;
-}
-
-function _parseCookieField(o, fieldName){
-	var regex = new RegExp('\\s*;\\s*' + fieldName, 'i');
-	var match = o.value.match(regex);
-	
-	o[fieldName] = !!match;
-	o.value = o.value.replace(regex, '');
-}
-
-function _parseCookieFieldValue(o, fieldName, defaultFieldValue){
-	var regex = new RegExp(fieldName + '\\s*=([^;]+)(;|$)', 'i');
-	var match = o.value.match(regex);
-	var fieldValue;
-	
-	if (match && match[1]) fieldValue = (match[1]||'').trim();
-
-	o[fieldName] = fieldValue || defaultFieldValue;
-	o.value = o.value.replace(regex, '');
-}
 
 var Oven = function(options){
-	if (!options || !options.url) throw {};
-	
-	var cookies = {}, 
-		oDefaultUrl = _getUrlObject(options.url);
-	
+	function _getUrlObject(myUrl){
+		if (!myUrl) return;
+		return url.parse(absolurl.resolve(myUrl));
+	}
+
+	function _doesPathMatch(path, cookiePath){
+		if (!path || !cookiePath) return true;
+		if (path === cookiePath) return true;
+
+		cookiePath = cookiePath.replace('/', '\\/');
+		if (!/\/$/.test(cookiePath)) cookiePath += '/';
+		if (!/\/$/.test(path)) path += '/';
+
+		return new RegExp('^' + cookiePath).test(path);
+	}
+
+	function _doesDomainMatch(domain, cookieDomain){
+		if (!domain || !cookieDomain) return true;
+		if (!/^\./.test(cookieDomain)) cookieDomain = '.' + cookieDomain;
+		if (!/^\./.test(domain)) domain = '.' + domain;
+
+		cookieDomain = cookieDomain.replace('.', '\\.');
+
+		return new RegExp(cookieDomain + '$').test(domain);
+	}
+
+	function _isCookieExpired(currentTime, cookieExpiration){
+		if (!cookieExpiration) return false;
+
+		return currentTime >= cookieExpiration;
+	}
+
+	function _getCookieName(headerValue){
+		var match = headerValue.match(/^\s*([^=]+)/i);
+		return match ? match[1] : undefined;
+	}
+
+	function _parseCookieField(o, fieldName){
+		var regex = new RegExp('\\s*;\\s*' + fieldName, 'i');
+		var match = o.value.match(regex);
+		
+		o[fieldName] = !!match;
+		o.value = o.value.replace(regex, '');
+	}
+
+	function _parseCookieFieldValue(o, fieldName, defaultFieldValue){
+		var regex = new RegExp(fieldName + '\\s*=([^;]+)(;|$)', 'i');
+		var match = o.value.match(regex);
+		var fieldValue;
+		
+		if (match && match[1]) fieldValue = (match[1]||'').trim();
+
+		o[fieldName] = fieldValue || defaultFieldValue;
+		o.value = o.value.replace(regex, '');
+	}
+
 	function _parseSetCookieHeader(header){
 		var o = new ParsedCookie();
 		o.value = header;
@@ -88,6 +84,13 @@ var Oven = function(options){
 		return o;
 	}
 
+	if (!options || !options.url) throw {};
+	
+	var cookies = {},
+		absolurl = new Absolurl(),
+		oDefaultUrl = _getUrlObject(options.url);
+	
+
 	this.setCookie = function(rawSetCookieHeaderValue){
 		var oCookie = _parseSetCookieHeader(rawSetCookieHeaderValue);
 		cookies[oCookie.id] = oCookie;
@@ -95,9 +98,8 @@ var Oven = function(options){
 		return oCookie;
 	};
 
-
 	this.getCookies = function(myUrl, dateTime){
-		var oUrl = _getUrlObject(absolurl.ensureComplete(myUrl, options.url) || options.url) || {};
+		var oUrl = _getUrlObject(absolurl.resolve(myUrl, options.url) || options.url) || {};
 		dateTime = dateTime || new Date();
 
 		return _.chain(cookies)
