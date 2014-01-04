@@ -1,6 +1,6 @@
 {
   "name": "oven",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "browser cookie store simulator",
   "main": "index.js",
   "scripts": {
@@ -23,8 +23,8 @@
     "url": "https://github.com/chevett/oven/issues"
   },
   "dependencies": {
-    "absolurl": "*",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "absolurl": "~1.0.1"
   },
   "devDependencies": {
     "mocha": "*",
