@@ -1,4 +1,4 @@
-var _ = require('underscore');
+var _ = require('lodash');
 var absolurl = require('absolurl');
 var url = require('url');
 

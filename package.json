@@ -14,8 +14,8 @@
     "cookie",
     "browser",
     "simulator",
-	"set-cookie",
-	"headers"
+    "set-cookie",
+    "headers"
   ],
   "author": "mike chevett",
   "license": "MIT",
@@ -23,8 +23,8 @@
     "url": "https://github.com/chevett/oven/issues"
   },
   "dependencies": {
-    "underscore": "~1.5.1",
-    "absolurl": "*"
+    "absolurl": "*",
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "mocha": "*",
