@@ -268,6 +268,14 @@ describe('short-bread', function(){
 			var cookieHeaderValue = oven.getCookieHeader('www.google.com');
 			expect(cookieHeaderValue).to.be.equal('');
 		});
+		it('should respect ports', function(){
+			var oven = new Oven({url: 'www.google.com'});
+			oven.setCookie('puppy=2; domain=.google.com:8888; Priority=High');
+			oven.setCookie('kitten=newValue; domain=.google.com; Path=hey/;');
+
+			var cookieHeaderValue = oven.getCookieHeader('www.google.com:8888');
+			expect(cookieHeaderValue).to.be.equal('puppy=2');
+		});
 	});
 	describe('ParsedCookie.toString()', function(){
 		it('should be reasonable', function(){
