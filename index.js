@@ -66,7 +66,7 @@ var Oven = function(options){
 
 		_parseCookieFieldValue(o, 'expires');
 		_parseCookieFieldValue(o, 'path', oDefaultUrl.pathname);
-		_parseCookieFieldValue(o, 'domain', oDefaultUrl.hostname);
+		_parseCookieFieldValue(o, 'domain', oDefaultUrl.host);
 		_parseCookieFieldValue(o, 'priority');
 		_parseCookieField(o, 'secure');
 		_parseCookieField(o, 'httpOnly');
@@ -104,7 +104,7 @@ var Oven = function(options){
 
 		return _.chain(cookies)
 				.filter(function(c){ return !_isCookieExpired(dateTime, c.expires); })
-				.filter(function(c){ return _doesDomainMatch(oUrl.hostname, c.domain); })
+				.filter(function(c){ return _doesDomainMatch(oUrl.host, c.domain); })
 				.filter(function(c){ return _doesPathMatch(oUrl.pathname, c.path); })
 				.filter(function(c){ return !c.secure || /^https/i.test(oUrl.protocol);  })
 				.value();
