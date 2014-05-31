@@ -268,13 +268,13 @@ describe('short-bread', function(){
 			var cookieHeaderValue = oven.getCookieHeader('www.google.com');
 			expect(cookieHeaderValue).to.be.equal('');
 		});
-		it('should respect ports', function(){
+		it('should ignore ports', function(){
 			var oven = new Oven({url: 'www.google.com'});
 			oven.setCookie('puppy=2; domain=.google.com:8888; Priority=High');
-			oven.setCookie('kitten=newValue; domain=.google.com; Path=hey/;');
+			oven.setCookie('kitten=newValue; domain=.google.com; Path=/;');
 
-			var cookieHeaderValue = oven.getCookieHeader('www.google.com:8888');
-			expect(cookieHeaderValue).to.be.equal('puppy=2');
+			var cookieHeaderValue = oven.getCookieHeader('www.google.com');
+			expect(cookieHeaderValue).to.be.equal('puppy=2; kitten=newValue');
 		});
 	});
 	describe('ParsedCookie.toString()', function(){
