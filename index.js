@@ -54,7 +54,12 @@ var Oven = function(options){
 		var match = o.value.match(regex);
 		var fieldValue;
 		
-		if (match && match[1]) fieldValue = (match[1]||'').trim();
+		if (match && match[1]) {
+			fieldValue = (match[1]||'').trim();
+			// don't include port in domain
+			// re: https://github.com/chevett/oven/pull/3#issuecomment-44389062
+			if (fieldName == 'domain') fieldValue = fieldValue.split(':')[0];
+		}
 
 		o[fieldName] = fieldValue || defaultFieldValue;
 		o.value = o.value.replace(regex, '');
