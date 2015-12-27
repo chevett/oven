@@ -73,6 +73,13 @@ describe('short-bread', function(){
 
 			expect(cookie.path).to.be.equal('/uno');
 		});
+		it('should work for root path', function(){
+			var oven = new Oven({url: 'www.google.com'});
+			var cookie = oven.setCookie('pottyName=pottyValue; Path=/;secure; expires=Sat, 02 May 2109 23:38:25 GMT; ');
+			oven.setCookie('test=ffff');
+
+			expect(oven.getCookie()).to.be.equal('test=fff;pottyName=pottyValue');
+		});
 		it('should parse the path', function(){
 			var oven = new Oven({url: 'www.google.com/uno'});
 			var cookie = oven.setCookie('shitName=shitValue; Path=/dos;secure; expires=Sat, 02 May 2109 23:38:25 GMT; ');
